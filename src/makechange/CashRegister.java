@@ -36,10 +36,14 @@ public class CashRegister {
 					+ "\n\t\t\t\texiting...");
 		// Display change
 		} else {
-			System.out.printf("Change Due: %.2f\n", change);
-			// TODO: Call getChange method here
+			System.out.println("----------------------------");
+			System.out.printf("🄲🄷🄰🄽🄶🄴 🄳🅄🄴: %.2f\n", change);
+			System.out.println("----------------------------");
+			
+			// Calling change loop
 			getChange(change);
 		}
+		closingPrompt();
 		sc.close();	
 	}
 	// Greeting prompt
@@ -53,49 +57,57 @@ public class CashRegister {
 				+ "||\\____|__  (____  /__|_ \\\\___  >  \\______  /___|  (____  /___|  /\\___  / \\___  >||\n"
 				+ "||        \\/     \\/     \\/    \\/          \\/     \\/     \\/     \\//_____/      \\/ ||\n"
 				+ ">>===============================================================================<<");
-		System.out.println("\n\t\t\tWhere your input makes change!");
+		System.out.println("\n\t\t\tWhere your input affects change!");
 		System.out.println("\t\t\t  Press ENTER to continue...");
 		sc.nextLine();
 	}
 	
-	// TODO: Calculate and pass the number of bills and coins to be returned 
-	public static void getChange (double changeDenom) {
+	public static void closingPrompt() {
+		System.out.println("----------------------------");
+		System.out.println("\n\n\t\t\tThank you for using MakeChange\u2122"
+				+ "\n\t\t  \u00A9 2025 MakeChange Inc. All rights reserved.");
+	}
+	
+	public static void getChange (double intoDollars) {
 		int cents = 0;
 		int denomination = 0;
 		int count = 0;
 		
-		cents = (int) (changeDenom * 100 + 0.5);
+		// Converting cents into dollars
+		cents = (int) (intoDollars * 100 + 0.5);
+		
+		// Starting loop at $20
 		denomination = 2_000;
 		
+		// Loop counts down cents
 		while(cents > 0) {
 			count = cents /denomination;
 			if(count > 0 ) {
-				System.out.println(count + " " + findDenom(denomination, count));
+				System.out.println("↳ " + count + " " + findDenom(denomination, count));
 				cents %= denomination;
 			} 
 			denomination = nextDenom(denomination);
-			
 		}
 	}
 
 	public static String findDenom(int denom, int count) {
 		switch(denom) {
 			case 2000:
-				return "$20 dollar bill";
+				return "$20 dollar bill" + (count > 1 ? "s" : "");
 			case 1000:
-				return "$10 dollar bill";
+				return "$10 dollar bill" + (count > 1 ? "s" : ""); 
 			case 500:
-				return "$5 dollar bill";
+				return "$5 dollar bill" + (count > 1 ? "s" : "");
 			case 100:
-				return "$1 dollar bill";
+				return "$1 dollar bill" + (count > 1 ? "s" : "");
 			case 25:
-				return "quarter";
+				return "quarter" + (count > 1 ? "s" : "");
 			case 10:
-				return "dime";
+				return "dime" + (count > 1 ? "s" : "");
 			case 5:
-				return "nickel";
+				return "nickel" + (count > 1 ? "s" : "");
 			case 1:
-				return "penny";
+				return "penn" + (count > 1 ? "ies" : "y");
 			default:
 				return "0";
 		}
