@@ -15,7 +15,6 @@ A simple Java program that calculates change for a transaction. The program allo
 - Switch statements
 - Conditional Statement
 - If statesment
-- Indeed used %
 - Iterative looping
 - Calling methods and calling methods within methods
 
